@@ -43,10 +43,11 @@ def ts_function_ensemble(vL):
                 bookV = ts_armselect_blockwise_prior_update.ts_armselect_blockwise_prior_update(bookV, vL, disV,
                                                                                                 vL['distributionTypes'])
                 bookV = ts_armcount.ts_armcount(bookV)
+                # COMPASS toolkit
                 bookV, disV = ts_call_observer.ts_call_observer(bookV, disV, vL)
                 disV = ts_posteriorupdates.ts_posteriorupdates(bookV, disV, vL, experimentNum)
                 conV = ts_regretnreward.ts_regretnreward(conV, bookV)
-                # bookV = ts_convergence.ts_convergence(bookV, conV, vL, episode, disV)
+                bookV = ts_convergence.ts_convergence(bookV, conV, vL, episode, disV)
                 # optimization - compass toolkit optimization module - end
                 if bookV['flg'] == True:
                     break

@@ -70,5 +70,5 @@ def ts_armselect_blockwise_prior_update(bookV, vL, disV, exp_distribution_type):
         bookV['armselCount'] += 1
         if bookV['trial'] == 0:
             bookV['armselected'] = 0
-
+    
     return bookV

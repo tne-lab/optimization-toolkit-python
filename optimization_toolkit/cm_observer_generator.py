@@ -4,28 +4,18 @@ import compass_toolkit.compass_filtering_up as compass_filtering_up
 
 
 def cm_observer_generator(inp, snr, Bk, GeneratorModel, xpos_gen, spos_gen, SensorModel, xpos_sen, spos_sen, din, duk,
-                          minmax, maxmax, trial):
-    # trial setup
-    c1k = np.zeros((1, 2))
-    c1k[:, 0] = GeneratorModel['Ck'][0][0] * np.ones((1, 1))
-    if trial > 10:
-        c1k[:, 1] = np.random.randint(0, 2, size=(1, 1))
-    else:
-        c1k[:, 1] = 0
+                          minmax, maxmax, trial, Reactiontime, trial_type):
 
     In = np.ones((1, 3))
-    In[:, 1] = c1k[:, 1]
+    In[:, 1] = trial_type
     In[:, 2] = 1
 
-    GeneratorModel['Bk'] = Bk
+    #GeneratorModel['Bk'] = Bk
     Uk = inp.reshape(1,-1)
     din = np.vstack((din, In))
     duk = np.vstack((duk, Uk))
     DISTR = np.array([2, 0])
-
-    # Generator/Imitator model
-    Gen_YRT_value, _, _, xpos_gen, spos_gen = compass_GetYn.compass_GetYn(GeneratorModel['S'] + 0.001, Uk, In, GeneratorModel,
-                                                            xpos_gen, spos_gen, minmax, maxmax)
+    Gen_YRT_value = Reactiontime
 
     # Sensor/Observer model
     SensorModel['Param_SDMall']['Bk'] = Bk * 0

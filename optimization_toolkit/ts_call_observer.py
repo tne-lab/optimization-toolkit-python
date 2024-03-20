@@ -2,29 +2,27 @@ import numpy as np
 import optimization_toolkit.cm_observer_generator as cm_observer_generator
 
 
-def ts_call_observer(bookV, disV, vL):
+def ts_call_observer(bookV, disV, vL, Reactiontime, trial_type):
     trial = bookV['trial']
     if trial != 0:
         ObserverYn, xpos_gen, spos_gen, xpos_sen, spos_sen, Gen_YRT_value, din, duk, Ysense = (
             cm_observer_generator.cm_observer_generator(
                 vL['input_to_model'][bookV['armselected']],
                 vL['snr'], bookV['Bk'],
-                vL['RDU']['Param_RDU'],
-                bookV['xpos_gen'][trial - 1],
-                bookV['spos_gen'][trial - 1],
+                [],
+                [],
+                [],
                 vL['SensorModel'],
                 bookV['xpos_sen'][trial - 1],
                 bookV['spos_sen'][trial - 1],
                 bookV['din'],
                 bookV['duk'],
-                vL['minmax'],
-                vL['maxmax'],
-                trial)
+                [],
+                [],
+                trial, Reactiontime, trial_type)
         )
 
         (bookV['measured']).append(ObserverYn)
-        bookV['xpos_gen'][trial] = xpos_gen
-        bookV['spos_gen'][trial] = spos_gen
         bookV['xpos_sen'][trial] = xpos_sen
         bookV['spos_sen'][trial] = spos_sen
         bookV['Gen_YRT_value'].append(Gen_YRT_value)
