@@ -124,7 +124,7 @@ def compass_create_state_space(nx=None, nUk=None, nIn=None, nIb=None, xM=None, c
     Param['cConstantUpdate'] = np.ones((nc, nIn))
     if cLink.size != 0 and cLinkUpdate.size != 0:
         for i in range(0, nc):
-            ind = np.argwhere(Param['cLinkMap'][i, :])
+            ind = np.argwhere(Param['cLinkMap'][i, :] >= 0)
             if ind.size > 0:
                 cInd = (Param['cLinkMap'][i, ind]).ravel().astype(int)  # adjusting the index
                 Param['cConstantUpdate'][i, cInd] = 0
