@@ -237,7 +237,7 @@ def compass_em(DISTR=None, Uk=None, In=None, Ib=None, Yn=None, Yb=None, Param=No
                         # XPos update
                         xpos = XPre[k]
                         for h in range(in_loop):
-                            st = np.minimum(MAX_EXP, ETk @ xpos + FTk @ Ib[k, np.newaxis])
+                            st = np.minimum(MAX_EXP, ETk @ xpos + FTk @ Ib[k, np.newaxis].T)
                             pk = np.exp(st) / (1 + np.exp(st))
                             xpos = XPre[k] + SPre[k] * ETk.T @ (Yb[k] - pk)
                         XPos[k] = xpos
@@ -468,7 +468,7 @@ def compass_em(DISTR=None, Uk=None, In=None, Ib=None, Yn=None, Yb=None, Param=No
                             Yk = Yn[k] - S
                             Yp = np.exp(CTk @ XPre[k] + DTk @ In[k, np.newaxis].T)
                             # Pk
-                            st = np.minimum(MAX_EXP, ETk @ XPre[k] + FTk @ Ib[k, :].T)
+                            st = np.minimum(MAX_EXP, ETk @ XPre[k] + FTk @ Ib[k, np.newaxis].T)
                             pk = np.exp(st) / (1 + np.exp(st))
                             # SPos
                             SPos[k] = np.linalg.inv(
