@@ -4,7 +4,7 @@ import compass_toolkit as ct
 import pickle
 
 
-def sensorfitting(num, loc, SDUall, Iter):
+def fitSensor(num, loc, SDUall, Iter):
     singleSubject = 1
     interference = SDUall['interference_SDU']
     yRT = SDUall['yRT_SDU']
