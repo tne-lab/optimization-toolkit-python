@@ -68,4 +68,4 @@ def cm_ts_setupdata(vL,techni, NTrials, divisor, snr, model, test, dst, SDMall):
     bookV['spos_sen'] = vL['spos_sen']
     bookV['mn_pt_selection'] = np.zeros((vL['NTrials'], int(0.75 * vL['divisor'])))
 
-    return disV, conV, bookV, vL
+    return disV, bookV, vL
